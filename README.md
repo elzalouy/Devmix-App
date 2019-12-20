@@ -1,68 +1,83 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Devmix
 
-## Available Scripts
 
-In the project directory, you can run:
+![build Status](https://scontent.fcai1-2.fna.fbcdn.net/v/t31.0-8/p960x960/22051325_1588748554518253_7857270476047284440_o.png?_nc_cat=110&_nc_ohc=7p-f5Q1tb7IAQk2MD91uHf7JsdXrPZIPYD5LonszpF93XlswfrN37dMtA&_nc_ht=scontent.fcai1-2.fna&oh=01ee5b7b345b542066f899ab9d4da338&oe=5E7B3D7B)
 
-### `yarn start`
+[![build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://www.linkedin.com/in/ezat-elzalouy-844bb0133/)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Devmix] is a front-end application which will help people to interact with our team and facilitate the way of learning Information technology fields.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+  - All the events which roganized by devmix
+  - Providing a service to be able to ask us.
+  - Attend a specific event.
+  - Join us if you want.
+  - Contact us to know your inquiry.
 
-### `yarn test`
+### Tech
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Devmix uses a number of open source packages to work properly:
 
-### `yarn build`
+* [React js] - A JavaScript library for building user interfaces. 
+* [NPM] - Essential JavaScript development tools that help you go to market faster and build powerful applications using modern open source code.
+* [Joi-Browser] - joi object schema validation bundled for the browser (babelified and bundled)
+* [axios] - Promise based HTTP client for the browser and node.js
+* [bootstrap] - Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.
+* [JWT] - JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
+* [lodash] - A modern JavaScript utility library delivering modularity, performance & extras.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+And of course Devmix itself is open source with a [public repository][devmix]
+ on GitHub.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+### Development
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Want to contribute? Great!
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Devmix uses Node.js for fast developing. So you should have [node.js] installed on you device. just click the link and download according to your operating system.
+[how to install node.js]
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Open your favorite Terminal and run these commands.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Clone the github:
+```sh
+$ mkdir devmix
+$ cd devmix
+$ git clone [link-here]
+```
 
-## Learn More
+Install dependencies:
+```sh
+$ npm install
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+For Running the application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```sh
+$ npm start
+```
 
-### Code Splitting
+**Free API, Hell Yeah!**
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+![](https://github.com/elzalouy/Devmix/blob/master/site.gif)
 
-### Analyzing the Bundle Size
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
-### Making a Progressive Web App
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+   [how to install node.js]: <https://www.guru99.com/download-install-node-js.html>
+   [devmix]: <https://github.com/elzalouy/Devmix-App>
+   [git-repo-url]: <https://github.com/elzalouy/Devmix>
+   [node.js]: <http://nodejs.org>
+   [Mongo Database]: <https://www.mongodb.com/>
+   [Express JS]: <expressjs.com>
+   [JSON Web Token]: <jwt.io>
+   [NPM]: <https://www.npmjs.com/>
+   [Cloudinary]:  <https://cloudinary.com/>
+   [React js]: <https://reactjs.org/>
+   [NPM]: <https://www.npmjs.com/>
+   [Joi-Browser]: <https://www.npmjs.com/package/joi-browser>
+   [axios]: <https://www.npmjs.com/package/axios>
+   [bootstrap]: <https://getbootstrap.com/>
+   [JWT]: <https://jwt.io/>
+   [lodash]: <https://lodash.com/>

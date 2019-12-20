@@ -57,7 +57,7 @@ For Running the application
 $ npm start
 ```
 
-**Free API, Hell Yeah!**
+**Free APP, Hell Yeah!**
 
 ![](https://github.com/elzalouy/Devmix/blob/master/site.gif)
 

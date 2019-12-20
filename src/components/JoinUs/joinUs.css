@@ -1,0 +1,60 @@
+.join_form {
+    box-shadow: 0 8px 12px 0 rgba(49, 49, 49, 0.2), 0 10px 26px 0 rgba(41, 41, 41, 0.19);
+}
+
+.list {
+    overflow: visible;
+    margin-top: -15px;
+    height: 106%;
+}
+
+.join_item {
+    height: 90px;
+    display: block;
+    padding-top: 5px;
+    font-size: 20px;
+}
+
+.icon {
+    transition: 0.3s;
+    display: inline-flex;
+    cursor: pointer;
+    color: white;
+}
+
+.icon:hover {
+    color: #14967c;
+    font-size: 110%;
+}
+
+.icon:active {
+    color: #14967c;
+    font-size: 110%;
+}
+
+.Label {
+    color: black;
+    opacity: 0.8;
+}
+
+input:active {
+    box-shadow: none !important;
+    border-color: none !important;
+}
+
+li {
+    display: block;
+}
+
+.current {
+    color: #14967c;
+    font-size: 110%;
+}
+
+@media only screen and (max-width:575px) {
+    .join_item {
+        display: inline;
+        padding-top: 0;
+        padding-right: 25px;
+    }
+}

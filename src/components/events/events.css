@@ -1,0 +1,156 @@
+.col-md-5 {
+  padding: 0;
+  margin: 0 15px;
+}
+
+.event-item {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  background-color: #f2f3f5;
+  transition: 0.2s;
+}
+
+.event-item:hover {
+  box-shadow: 0 8px 12px 0 rgba(49, 49, 49, 0.2),
+    0 10px 26px 0 rgba(41, 41, 41, 0.19);
+}
+
+.title {
+  position: absolute;
+  top: 2rem;
+  background-color: #1abc9c;
+}
+
+.event_cover {
+  height: 350px !important;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.item-data {
+  width: auto !important;
+  text-align: center;
+  padding: auto;
+  text-decoration: none;
+}
+
+.details {
+  transition: 0.2s;
+  background-color: #1abc9c;
+  width: auto;
+  padding: 40px 16px 0 16px;
+  border: 0;
+  text-decoration: none !important;
+}
+
+.details:hover {
+  background-color: #14967c;
+}
+
+.date {
+  padding: 18px 10px;
+  width: auto;
+  border: 0;
+}
+
+.checked-label {
+  border-style: solid !important;
+  border-top: 0px !important;
+  border-left: 0px;
+  border-right: 0px;
+  border-color: #1abc9c !important;
+}
+
+.activities {
+  position: absolute;
+  margin-top: -65px;
+}
+
+.speaker {
+  position: relative;
+  overflow: hidden;
+  height: 350px;
+  transition: 0.3s;
+}
+
+.speaker:hover {
+  box-shadow: 0 8px 12px 0 rgba(49, 49, 49, 0.2),
+    0 10px 26px 0 rgba(41, 41, 41, 0.19);
+}
+
+.speaker_cover {
+  height: 220px;
+  width: 100%;
+}
+
+.event-input-edit {
+  border: none;
+  border-bottom: 1px;
+  border-color: #9e9e9e;
+  background-color: #1abc9c;
+}
+
+.ellipsis {
+  cursor: pointer;
+}
+
+.event-session-input {
+  border: none;
+}
+
+.speakersSearch {
+  height: 120px;
+  overflow: scroll;
+}
+
+.newEventForm {
+  box-shadow: 0 8px 12px 0 rgba(49, 49, 49, 0.2),
+    0 10px 26px 0 rgba(41, 41, 41, 0.19);
+}
+
+.list {
+  overflow: visible;
+  margin-top: -15px;
+  height: 106%;
+}
+
+.form_list_item {
+  height: 90px;
+  display: block;
+  padding-top: 5px;
+  font-size: 20px;
+}
+
+.session_num {
+  cursor: pointer;
+  width: 30px !important;
+  transition: 0.3s;
+}
+
+.session_num:hover {
+  font-size: 102%;
+  color: #14967c !important;
+}
+
+.active_session {
+  color: #14967c !important;
+}
+
+.add_session {
+  transition: 0.4s;
+}
+
+.add_session:hover {
+  color: #1a252f !important;
+}
+
+@media only screen and (max-width: 575px) {
+  .form_list_item {
+    display: inline;
+    padding-top: 0;
+    padding-right: 25px;
+  }
+}

@@ -1,0 +1,33 @@
+.services-item {
+    cursor: pointer;
+    margin-bottom: 30px;
+    border-radius: .5rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.services-item-caption {
+    position: absolute !important;
+    background-color: #1abc9c;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.services-item-caption:hover {
+    opacity: 0.9;
+}
+
+.close {
+    position: absolute;
+    z-index: 1;
+    right: 1rem;
+    top: 0.5rem;
+    font-size: 3rem;
+    line-height: 3rem;
+    color: #1abc9c;
+    opacity: 1;
+}
+
+.help-message {
+    padding: 5px 0 5px 0 !important;
+}

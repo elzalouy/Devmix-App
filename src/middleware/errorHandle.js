@@ -4,7 +4,6 @@ export default function(handler) {
       await handler(e);
     } catch (ex) {
       console.log(ex);
-      alert(ex);
     }
   };
 }

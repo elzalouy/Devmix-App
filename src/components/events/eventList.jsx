@@ -11,7 +11,7 @@ class EventsList extends Component {
   async componentDidMount() {
     try {
       const { data: events } = await getALlEvents();
-      if (!events) window.location = "/";
+      if (!events) return null;
       const state = this.state;
       state.events = events;
       state.filtered = events;

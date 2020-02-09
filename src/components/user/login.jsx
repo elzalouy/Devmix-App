@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import loginImg from "../../assets/login.svg";
 import { login } from "../../httpServices/auth/auth";
 import { ForgotPassword } from "../../httpServices/user/user";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
 class Login extends Component {
   state = {
     acc: { email: "", password: "" },

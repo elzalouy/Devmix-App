@@ -3,7 +3,7 @@ import { ValidateJoinForm } from "../../httpServices/join/joinJoiSchema";
 import { addJoinRequest } from "../../httpServices/join/joinForm";
 import { phaseOne, phaseTwo, phaseThree, phaseFour } from "./phases";
 import "../JoinUs/joinUs.css";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
 class JoinUs extends Component {
   state = {
     form: {

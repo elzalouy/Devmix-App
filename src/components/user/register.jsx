@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import loginImg from "../../assets/login.svg";
 import { validateUser } from "../../httpServices/user/UserJoiSchema";
 import * as userService from "../../httpServices/user/user";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
 class Register extends Component {
   state = {
     NewAcc: { name: "", email: "", password: "", gender: "" },

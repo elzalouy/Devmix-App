@@ -17,8 +17,8 @@ import { getUserByName, getUserByToken } from "../../../httpServices/user/user";
 import { getToken } from "../../../httpServices/localStorage";
 import { authed } from "../../../httpServices/auth/auth";
 import isAdmin from "../../../middleware/admin";
+import handle from "../../../middleware/errorHandle";
 const _ = require("lodash");
-const handle = require("../../../middleware/errorHandle");
 class EventComponent extends Component {
   state = {
     status: "view",

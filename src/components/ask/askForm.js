@@ -4,7 +4,7 @@ import { authed } from "../../httpServices/auth/auth";
 import { validateAsk } from "../../httpServices/ask/askJoiSchema";
 import { saveAsk } from "../../httpServices/ask/ask";
 import { getUserByToken } from "../../httpServices/user/user";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
 class AskForm extends Component {
   state = {
     anonymous: false,

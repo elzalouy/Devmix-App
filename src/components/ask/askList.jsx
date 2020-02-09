@@ -15,7 +15,7 @@ import { getToken } from "../../httpServices/localStorage";
 import isAdmin from "../../middleware/admin";
 import { paginate } from "../../utils/paginate";
 import Pagination from "../../components/common/pagination/pagination";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
 const _ = require("lodash");
 
 class AskList extends Component {

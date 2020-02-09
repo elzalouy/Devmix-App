@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import HeadTitle from "../common/headTitle/headTitle";
 import { validateContact } from "../../httpServices/contact/contactJoiSchema";
 import { addNewContact } from "../../httpServices/contact/contact";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
+
 class ContactSection extends Component {
   state = {
     contactRequest: {

@@ -4,7 +4,8 @@ import { getALlEvents } from "../../httpServices/event/event";
 import { admin } from "../../httpServices/auth/auth";
 import EventItem from "./eventItem";
 import "./events.css";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
+
 class EventsList extends Component {
   state = { filter: "all", events: [], filtered: [] };
   async componentDidMount() {

@@ -10,7 +10,8 @@ import { saveEvent, saveEventImage } from "../../httpServices/event/event";
 import { admin } from "../../httpServices/auth/auth";
 import { getToken } from "../../httpServices/localStorage";
 import userImage from "../../assets/user.png";
-const handle = require("../../middleware/errorHandle");
+import handle from "../../middleware/errorHandle";
+
 class AddEvent extends Component {
   image = React.createRef();
   state = {

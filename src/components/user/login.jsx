@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import loginImg from "../../assets/login.svg";
 import { login } from "../../httpServices/auth/auth";
+import { ForgotPassword } from "../../httpServices/user/user";
 const handle = require("../../middleware/errorHandle");
 class Login extends Component {
   state = {
     acc: { email: "", password: "" },
-    errors: { key: "", message: "" }
-  };
-  handleSubmit = e => {
-    e.preventDefault();
+    errors: { key: "", message: "" },
+    forgotPassword: ""
   };
   handleCahnge = handle(({ currentTarget: input }) => {
     const state = this.state;
@@ -27,6 +25,18 @@ class Login extends Component {
     }
     if (response.data) window.location.href = "/";
   });
+  handleForgotPassword = async () => {
+    const state = this.state;
+    let email = state.acc.email;
+    let result = await ForgotPassword(email);
+    if (result.error) {
+      alert(result.error.message);
+    } else {
+      alert(result.data);
+      this.setState({ state });
+      window.location.reload();
+    }
+  };
   render() {
     const { acc, errors } = this.state;
     return (
@@ -88,13 +98,73 @@ class Login extends Component {
                 </div>
                 <div className="col-sm-4"></div>
                 <div className="col-sm-4"></div>
-                <div className="col-sm-2 mt-2">
-                  <Link to="/forgotPassword" className="text-white">
+                <div
+                  className="col-sm-2 mt-2"
+                  data-toggle="modal"
+                  data-target="#forgetPassword"
+                >
+                  <button className="btn text-white cursor-p">
                     forgot password ..!
-                  </Link>
+                  </button>
                 </div>
               </div>
             </form>
+          </div>
+        </div>
+        <div
+          className="modal fade my-5"
+          id="forgetPassword"
+          tabIndex="-1"
+          role="dialog"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog mt-5" role="document">
+            <div className="modal-content bg-dark brd-3 text-white">
+              <div className="modal-header border-0">
+                <h5 className="modal-title" id="exampleModalLabel">
+                  Send Mail
+                </h5>
+                <button
+                  type="button"
+                  className="close text-white"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div className="modal-body border-0">
+                <input
+                  type="email"
+                  name="email"
+                  value={acc.email}
+                  onChange={this.handleCahnge}
+                  className="form-control brd-2 f-18"
+                  id="email"
+                  placeholder="enter your email"
+                  required
+                  data-validation-required-message="Please enter your email."
+                  aria-invalid="false"
+                />
+              </div>
+              <div className="modal-footer border-0">
+                <button
+                  type="button"
+                  className="btn btn-secondary py-2"
+                  data-dismiss="modal"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="button"
+                  className="btn bottomDark py-2"
+                  onClick={this.handleForgotPassword}
+                >
+                  Send
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </React.Fragment>

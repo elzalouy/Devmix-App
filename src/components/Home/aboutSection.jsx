@@ -9,7 +9,7 @@ const AboutSection = () => {
         <div className="row justify-content-center">
           <div className="col-lg-6 ml-auto">
             <p className="f-18 fw-n">
-              Devmix team aims to build a strong developers community from all
+              Devmix team aims to build a strong engineers community from all
               over the world. By helping people to learn and develop their
               skills. we have many several services like events, workshops,
               online workshops, building and discussing projects, etc...

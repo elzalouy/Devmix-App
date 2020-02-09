@@ -1,5 +1,5 @@
 const { authed, admin } = require("../httpServices/auth/auth");
-module.exports = function(handler) {
+export default function(handler) {
   return async e => {
     if (authed()) {
       if (admin()) {
@@ -11,4 +11,4 @@ module.exports = function(handler) {
       return (window.location = "/login");
     }
   };
-};
+}

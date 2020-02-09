@@ -23,13 +23,14 @@ class ContactSection extends Component {
     const state = this.state;
     const result = validateContact(state.contactRequest);
     if (!result) {
-      const result = await addNewContact(state.contactRequest);
-      if (result.error) state.error = result.error;
-      else {
+      const response = await addNewContact(state.contactRequest);
+      if (response.error) {
+        state.error = response.error;
+      } else {
         alert("The message sent.");
         window.location.reload();
       }
-    }
+    } else state.error = result;
     this.setState({ state });
   });
   render() {
@@ -40,7 +41,7 @@ class ContactSection extends Component {
         <div className="container">
           <div className="row">
             <div className="col-sm-2"></div>
-            <div className="col-sm-8">
+            <div className="col-xl-8">
               <form onSubmit={this.handleSubmit}>
                 <div className="control-group mt-5">
                   <div className="form-group mb-0 pb-2">
@@ -111,7 +112,7 @@ class ContactSection extends Component {
                           onChange={this.handleChange}
                         ></textarea>
                         <p className="help-message text-danger">
-                          {error && error.message}
+                          {error && error.message && error.message}
                         </p>
                       </div>
                       <div className="col-sm-2"></div>
@@ -120,6 +121,7 @@ class ContactSection extends Component {
                         <button
                           type="submit"
                           className="form-control btn btn-outline-dark f-32 brd-4"
+                          onClick={this.handleSubmit}
                         >
                           Send
                         </button>

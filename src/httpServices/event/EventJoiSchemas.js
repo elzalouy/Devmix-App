@@ -18,7 +18,10 @@ const eventSessionSchema = {
 
 const feedbacks = {
   user_id: Joi.string().required(),
-  feedback: Joi.string().required()
+  feedback: Joi.string()
+    .required()
+    .min(3)
+    .max(50)
 };
 const EventSchema = {
   name: Joi.string()
@@ -57,5 +60,16 @@ function validateSession(session) {
   let error = result.error.details[0].message;
   return error;
 }
-
-export { EventSchema, validateEvent, eventSessionSchema, validateSession };
+function validateFeedback(feedback) {
+  const result = Joi.validate(feedback, feedbacks);
+  if (!result.error) return null;
+  let error = result.error.details[0].message;
+  return error;
+}
+export {
+  EventSchema,
+  validateEvent,
+  eventSessionSchema,
+  validateSession,
+  validateFeedback
+};

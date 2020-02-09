@@ -14,9 +14,12 @@ class Register extends Component {
     const state = this.state;
     if (state.errors && state.errors.message.length > 0) return 0;
     const response = await userService.addNewUser(this.state.NewAcc);
-    if (response.error) state.errors = response.error;
-    this.setState({ state });
-    window.location.href = "/";
+    if (response.error) {
+      state.errors = response.error;
+      this.setState({ state });
+    } else {
+      window.location.href = "/";
+    }
   });
   handleChange = handle(({ currentTarget: input }) => {
     const state = this.state;

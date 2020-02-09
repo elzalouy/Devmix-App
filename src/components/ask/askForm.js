@@ -7,22 +7,25 @@ import { getUserByToken } from "../../httpServices/user/user";
 const handle = require("../../middleware/errorHandle");
 class AskForm extends Component {
   state = {
-    anonymous: true,
+    anonymous: false,
     ask: { question: "" },
     error: {},
     textCount: 2000
   };
+
   handleChangeAnony = handle(() => {
     const state = this.state;
     state.anonymous = state.anonymous === true ? false : true;
     this.setState({ state });
   });
+
   handleChangeAsk = handle(({ currentTarget: e }) => {
     const state = this.state;
     state.ask.question = e.value;
     state.textCount = 2000 - e.value.length;
     this.setState({ state });
   });
+
   handleSubmitAsk = handle(async () => {
     const state = this.state;
     const user = getUserByToken();
@@ -30,7 +33,7 @@ class AskForm extends Component {
       question: state.ask.question,
       answer: null,
       date: Date.now(),
-      user_id: state.anonymous ? null : user._id
+      user_id: state.anonymous ? null : user ? user._id : null
     };
     const result = validateAsk(ask);
     if (result) state.error = result;

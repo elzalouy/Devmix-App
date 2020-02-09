@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { getTime } from "../../../utils/formatDate";
 import { getUserById } from "../../../httpServices/user/user";
 import { admin } from "../../../httpServices/auth/auth";
+import UserImage from "../../../assets/user.png";
 class SessionForm extends Component {
   state = { user: {}, errors: null };
   async componentDidMount() {
@@ -29,7 +30,7 @@ class SessionForm extends Component {
     if (!admin()) return 0;
     return (
       <React.Fragment>
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className="p-0 m-0">
           <div className="row">
             <h4 className="fw-b">
               <mark className="px-2 m-2">
@@ -93,7 +94,7 @@ class SessionForm extends Component {
                 placeholder="Search"
                 onChange={speakersSearch}
               />
-              {speakers.length > 0 && (
+              {speakers && speakers.length > 0 && (
                 <div className="speakersSearch">
                   <ul className="list-group">
                     {speakers.map(item => (
@@ -105,7 +106,9 @@ class SessionForm extends Component {
                       >
                         <img
                           src={
-                            user && user.profile_photo ? item.profile_photo : ""
+                            item && item.profile_photo
+                              ? item.profile_photo.url
+                              : UserImage
                           }
                           style={{ width: "40px", height: "40px" }}
                           alt=""
@@ -125,7 +128,11 @@ class SessionForm extends Component {
                 <h5 className="px-3">Speaker</h5>
                 <div className="align-items-center row  border br-dark brd-5 w-50">
                   <img
-                    src={user && user.profile_photo ? user.profile_photo : ""}
+                    src={
+                      user && user.profile_photo
+                        ? user.profile_photo.url
+                        : UserImage
+                    }
                     alt={user && user.name ? user.name : ""}
                     style={{ height: "46px", width: "46px" }}
                     className="brd-100"

@@ -1,0 +1,8 @@
+.Search {
+    height: 120px;
+    overflow: scroll;
+}
+
+.admin_photo {
+    height: 400px !important;
+}

@@ -6,7 +6,6 @@ import { getToken } from "../../../httpServices/localStorage";
 import { Link } from "react-router-dom";
 class HeaderCard extends Component {
   state = { coverPhoto: {} };
-
   render() {
     const {
       event,
@@ -72,6 +71,20 @@ class HeaderCard extends Component {
                   Attend Now
                 </button>
               )}
+            </React.Fragment>
+          )}
+          {date < Date.now() && attendee && (
+            <React.Fragment>
+              <button
+                className="btn bottomDark p-2 m-2 text-dark"
+                disabled={true}
+              >
+                <i
+                  className="fas fa-calendar-check px-2"
+                  aria-hidden="true"
+                ></i>
+                Attended
+              </button>
             </React.Fragment>
           )}
           {admin() && (

@@ -9,6 +9,7 @@ import {
 import { saveEvent, saveEventImage } from "../../httpServices/event/event";
 import { admin } from "../../httpServices/auth/auth";
 import { getToken } from "../../httpServices/localStorage";
+import userImage from "../../assets/user.png";
 const handle = require("../../middleware/errorHandle");
 class AddEvent extends Component {
   image = React.createRef();
@@ -65,16 +66,17 @@ class AddEvent extends Component {
     this.setState({ state });
   });
 
-  handleSearch = handle(({ currentTarget: element }) => {
+  handleSearch = handle(async ({ currentTarget: element }) => {
     const state = this.state;
-    state.speakersSearch = getUserByName(element.value);
+    state.speakersSearch = (await getUserByName(element.value)).data;
     this.setState({ state });
   });
-  handleChooseSpeaker = handle(({ currentTarget: element }) => {
+  handleChooseSpeaker = handle(async ({ currentTarget: element }) => {
     const state = this.state;
+    console.log(element.id);
     state.form.sessions[state.session_index].instructor_id = element.id;
     state.speakersSearch = [];
-    state.speaker = getUserById(element.id);
+    state.speaker = (await getUserById(element.id)).data;
     this.setState({ state });
   });
   handleChooseSession = handle(({ currentTarget: element }) => {
@@ -136,12 +138,10 @@ class AddEvent extends Component {
         );
         if (response.error) state.error = response.error.message;
         if (response.data) {
-          console.log("entered");
           await saveEventImage(form.cover_photo, response.data, token);
         }
       } else state.error = result;
       this.setState({ state });
-      window.location = "/events";
     }
   });
   render() {
@@ -154,6 +154,7 @@ class AddEvent extends Component {
       session_index,
       speaker
     } = this.state;
+    console.log(speaker);
     return (
       <React.Fragment>
         <div className="page-section bg-dark d-flex justify-content-center">
@@ -211,7 +212,7 @@ class AddEvent extends Component {
                   <h3 className="text-dark text-right p-3 mx-5">Devmix Org</h3>
                   <div className="row">
                     <div className="col-sm-11">
-                      <form onSubmit={this.handleSubmit}>
+                      <form>
                         <React.Fragment>
                           <h5 className="text-dark fw-b">
                             {phaseNum === "0" ? (
@@ -320,20 +321,20 @@ class AddEvent extends Component {
                                   {item.html === "search" && (
                                     <React.Fragment>
                                       <h6 className="Label">{item.label}</h6>
-                                      {speakersSearch &&
-                                        form.sessions[session_index]
-                                          .instructor_id.length === 0 && (
-                                          <React.Fragment>
-                                            <div>
-                                              <input
-                                                type={item.type}
-                                                name={item.name}
-                                                placeholder={item.placeholder}
-                                                onChange={this.handleSearch}
-                                                className="bg-white border border-top-0 border-right-0 border-left-0 w-75 br-dark"
-                                              />
-                                              <ul className="list-group col-sm-9">
-                                                {speakersSearch.map(item => (
+                                      {form.sessions[session_index]
+                                        .instructor_id.length === 0 && (
+                                        <React.Fragment>
+                                          <div>
+                                            <input
+                                              type={item.type}
+                                              name={item.name}
+                                              placeholder={item.placeholder}
+                                              onChange={this.handleSearch}
+                                              className="bg-white border border-top-0 border-right-0 border-left-0 w-75 br-dark"
+                                            />
+                                            <ul className="list-group col-sm-9">
+                                              {speakersSearch &&
+                                                speakersSearch.map(item => (
                                                   <li
                                                     onClick={
                                                       this.handleChooseSpeaker
@@ -343,7 +344,12 @@ class AddEvent extends Component {
                                                     id={item._id}
                                                   >
                                                     <img
-                                                      src={item.profile_photo}
+                                                      src={
+                                                        item.profile_photo
+                                                          ? item.profile_photo
+                                                              .url
+                                                          : userImage
+                                                      }
                                                       style={{
                                                         width: "40px",
                                                         height: "40px"
@@ -354,16 +360,20 @@ class AddEvent extends Component {
                                                     {item.name}
                                                   </li>
                                                 ))}
-                                              </ul>
-                                            </div>
-                                          </React.Fragment>
-                                        )}
+                                            </ul>
+                                          </div>
+                                        </React.Fragment>
+                                      )}
                                       {form.sessions[session_index]
                                         .instructor_id.length > 0 && (
                                         <React.Fragment>
                                           <div className="align-items-center row  border br-dark brd-5 w-50">
                                             <img
-                                              src={speaker.profile_photo}
+                                              src={
+                                                speaker.profile_photo
+                                                  ? speaker.profile_photo.url
+                                                  : userImage
+                                              }
                                               alt={speaker.name}
                                               style={{
                                                 height: "46px",
@@ -388,14 +398,16 @@ class AddEvent extends Component {
                                       )}
                                     </React.Fragment>
                                   )}
-                                  {item.html === "button" && phaseNum !== "1" && (
-                                    <button
-                                      className="form-control w-auto btn btn-outline-dark"
-                                      type={item.type}
-                                    >
-                                      {item.label}
-                                    </button>
-                                  )}
+                                  {item.html === "button" &&
+                                    item.type === "submit" && (
+                                      <button
+                                        className="form-control w-auto btn btn-outline-dark"
+                                        type={item.type}
+                                        onClick={this.handleSubmit}
+                                      >
+                                        {item.label}
+                                      </button>
+                                    )}
                                   {item.html === "button" && phaseNum === "1" && (
                                     <div
                                       className="form-control w-auto btn btn-outline-dark"

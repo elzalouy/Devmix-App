@@ -1,0 +1,33 @@
+.profile_photo {
+    border-radius: 10px;
+    background-color: gray;
+}
+
+.change_photo {
+    font-size: 25px;
+    margin-left: 50px;
+    margin-top: -30px;
+    transition: 0.5s;
+}
+
+.change_photo:hover {
+    font-size: 26px;
+}
+
+.header {
+    overflow: visible;
+    height: 650px;
+}
+
+.profile {
+    overflow: hidden;
+    margin-top: -530px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.profile:focus {
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 15px 0 rgba(0, 0, 0, 0.19);
+}

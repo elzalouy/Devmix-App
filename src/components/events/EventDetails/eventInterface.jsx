@@ -5,14 +5,15 @@ import {
   updateEvent,
   getEventById,
   deleteSession,
-  saveEventImage
+  saveEventImage,
+  giveFeedback
 } from "../../../httpServices/event/event";
 import {
   attendEvent,
   getUserAttendee,
   notAttendEvent
 } from "../../../httpServices/event/attendees";
-import { getUserByName } from "../../../httpServices/user/user";
+import { getUserByName, getUserByToken } from "../../../httpServices/user/user";
 import { getToken } from "../../../httpServices/localStorage";
 import { authed } from "../../../httpServices/auth/auth";
 import isAdmin from "../../../middleware/admin";
@@ -24,10 +25,12 @@ class EventComponent extends Component {
     event: {},
     days: [],
     errors: "",
+    feedbackError: {},
     session_id: "",
     speakers_search_word: "",
     speakers: [],
-    attendee: false
+    attendee: false,
+    feedback: ""
   };
   async componentDidMount() {
     try {
@@ -41,9 +44,12 @@ class EventComponent extends Component {
         state.event = response.data;
       }
       if (authed()) {
-        const attendee = await getUserAttendee(id, getToken());
-        if (attendee.data) state.attendee = true;
-        else state.attendee = false;
+        let user = await getUserByToken(getToken());
+        if (user) {
+          const attendee = await getUserAttendee(id, user._id);
+          if (attendee.data) state.attendee = true;
+          else state.attendee = false;
+        }
       }
       this.setState({ state });
       this.ChangeNumberOfDays();
@@ -94,7 +100,17 @@ class EventComponent extends Component {
     })
   );
   cancelSubmit = handle(async e => {
-    this.props.history.go();
+    const state = this.state;
+    if (state.status === "addSession") {
+      let index = state.event.sessions.length;
+      _.remove(state.event.sessions, state.event.sessions[index - 1]);
+    }
+    state.status = "view";
+    state.errors = "";
+    state.session_id = "";
+    state.speakers = [];
+    state.speakers_search_word = "";
+    this.setState({ state });
   });
   handleEdit = handle(
     isAdmin(e => {
@@ -134,7 +150,7 @@ class EventComponent extends Component {
     isAdmin(() => {
       const state = this.state;
       state.session_id = "new";
-      state.status = "editSession";
+      state.status = "addSession";
       const session = {
         _id: "new",
         session_name: "",
@@ -247,5 +263,20 @@ class EventComponent extends Component {
     if (result.data) state.attendee = false;
     this.setState({ state });
   });
+  handleChangeFeedback = ({ currentTarget: e }) => {
+    const state = this.state;
+    state.feedback = e.value;
+    this.setState({ state });
+  };
+  handleGiveFeedback = async () => {
+    const state = this.state;
+    let feedback = { event: state.event._id, feedback: state.feedback };
+    const result = await giveFeedback(feedback, getToken());
+    if (result.error) state.feedbackError = result.error;
+    else {
+      state.event.feedbacks = result.data;
+    }
+    this.setState({ state });
+  };
 }
 export default EventComponent;

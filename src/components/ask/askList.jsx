@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Stats from "./stats";
 import { admin, authed } from "../../httpServices/auth/auth";
 import userImg from "../../assets/user.png";
 import { getDate } from "../../utils/formatDate";
@@ -6,49 +7,44 @@ import {
   getAsks,
   getNotAnswered,
   AnswerQuestion,
-  getAsksCount,
   deleteQuestion
 } from "../../httpServices/ask/ask";
 import { getUserByToken } from "../../httpServices/user/user";
 import { validateAsk } from "../../httpServices/ask/askJoiSchema";
 import { getToken } from "../../httpServices/localStorage";
-import isAdmin from "../../middleware/auth";
+import isAdmin from "../../middleware/admin";
+import { paginate } from "../../utils/paginate";
+import Pagination from "../../components/common/pagination/pagination";
 const handle = require("../../middleware/errorHandle");
 const _ = require("lodash");
 
 class AskList extends Component {
   state = {
     allasks: [],
-    KnownasksCount: 0,
-    unknowAsksCount: 0,
     filtered: [],
-    asksFrom: 0,
-    asksTo: 20,
     listError: {},
     formError: {},
     active: "all",
     questionId: "",
     answer: "",
-    status: "view"
+    status: "view",
+    currentPage: 1,
+    pageSize: 5
   };
   async componentDidMount() {
     try {
       const state = this.state;
-      const asks = await getAsks(state.asksFrom, state.asksTo);
+      const asks = await getAsks();
       if (asks.error) state.listError = asks.error;
       else state.allasks = state.filtered = asks.data;
-      const count = await getAsksCount();
-      if (count.error) state.listError = count.error;
-      else {
-        state.unknowAsksCount = count.data.unknownCount;
-        state.KnownasksCount = count.data.knownCount;
-      }
       this.setState({ state });
     } catch (ex) {
       alert(ex);
     }
   }
-
+  handlePageChange = page => {
+    this.setState({ currentPage: page, contact_item: null });
+  };
   handleFilterQuestions = handle(async ({ currentTarget: e }) => {
     const state = this.state;
     state.active = e.id;
@@ -68,6 +64,11 @@ class AskList extends Component {
     state.status = "view";
     this.setState({ state });
   });
+  getPagedData = () => {
+    const { pageSize, currentPage, filtered } = this.state;
+    let Filtered = paginate(filtered, currentPage, pageSize);
+    return { totalCount: filtered ? filtered.length : 0, allAsks: Filtered };
+  };
   handleChangeStatus = handle(
     isAdmin(({ currentTarget: e }) => {
       const state = this.state;
@@ -124,23 +125,29 @@ class AskList extends Component {
     })
   );
   hanldeCancel = handle(() => {
-    window.location.reload();
+    const state = this.state;
+    state.status = "view";
+    state.questionId = "";
+    state.answer = "";
+    state.formError = {};
+    state.listError = {};
+    this.setState({ state });
   });
   render() {
     const {
-      filtered: allAsks,
       active,
       questionId,
-      unknowAsksCount,
-      KnownasksCount,
       status,
-      formError
+      formError,
+      pageSize,
+      currentPage
     } = this.state;
+    let { totalCount, allAsks } = this.getPagedData();
     return (
       <div className="page-section justify-content-center align-items-center bg-gray text-center text-black">
         <div className="container pt-2">
-          <div className="row  m-0">
-            <div className="col-sm-8 p-0">
+          <div className="row m-0">
+            <div className="col-md-8 p-0">
               <ul className="row custom-control-inline w-100 text-left p-0 m-0 nav-tabs border-top-0 border-right-0 border-left-0 border border-success border-2">
                 <li
                   key="all"
@@ -195,7 +202,7 @@ class AskList extends Component {
               {allAsks && allAsks.length === 0 && (
                 <div className="mt-5 text-center">
                   <mark className="container col pt-1 w-50 justify-content-center mt-5">
-                    There no asks until now.
+                    There are no asks until now.
                   </mark>
                 </div>
               )}
@@ -203,10 +210,11 @@ class AskList extends Component {
                 allAsks.length > 0 &&
                 allAsks.map(item => {
                   const { day, month, year } = getDate(item.date);
+                  console.log(item);
                   return (
                     <div
                       key={item && item._id}
-                      className="bg-white justify-content-center container my-4 shadow"
+                      className="bg-white brd-2 justify-content-center container my-4 shadow"
                     >
                       <div className="row pt-3">
                         <div className="col-1 mr-5">
@@ -214,7 +222,7 @@ class AskList extends Component {
                             id={item && item.user_id}
                             src={
                               item && item.user_photo
-                                ? item.user_photo
+                                ? item.user_photo.url
                                 : userImg
                             }
                             alt=""
@@ -236,7 +244,7 @@ class AskList extends Component {
                             </h4>
                             {admin() && (
                               <React.Fragment>
-                                <div className="text-right col-1 mx-2">
+                                <div className="text-right col-md-1 mx-2">
                                   <i
                                     className="fa fa-ellipsis-h ellipsis f-18 text-black"
                                     aria-hidden="true"
@@ -255,7 +263,6 @@ class AskList extends Component {
                               </React.Fragment>
                             )}
                           </div>
-
                           <h6 className="text-gray w-90 p-0 m-0">
                             {item && item.answer && item._id !== questionId ? (
                               <React.Fragment>{item.answer}</React.Fragment>
@@ -343,28 +350,16 @@ class AskList extends Component {
                     </div>
                   );
                 })}
-            </div>
-            <div className="col-sm-4">
-              <div className="bg-white mx-5 py-2 justify-content-center container text-left shadow">
-                <h5 className="text-dark fw-b pt-1">Stats</h5>
-                <hr className="pt-1" />
-                <div className="custom-control-inline w-100 bg-gray pl-2 mb-2 py-2">
-                  <i
-                    className="fa fa-question bg-dark p-2"
-                    aria-hidden="true"
-                  ></i>
-                  <p className="p-0 m-0 pt-1 ml-2 fw-b">
-                    Unknown Questions ( {unknowAsksCount} )
-                  </p>
-                </div>
-                <div className="custom-control-inline w-100 bg-gray pl-2 mb-2 py-2">
-                  <i className="fas fa-user bg-dark p-2   "></i>
-                  <p className="p-0 m-0 pt-1 ml-2 fw-b">
-                    known Questions ( {KnownasksCount} )
-                  </p>
-                </div>
+              <div className="row justify-content-center">
+                <Pagination
+                  onPageChange={this.handlePageChange}
+                  itemsCount={totalCount}
+                  pageSize={pageSize}
+                  currentPage={currentPage}
+                />
               </div>
             </div>
+            <Stats />
           </div>
         </div>
       </div>

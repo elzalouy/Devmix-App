@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import eventsImg from "../../../assets/event.svg";
-import { admin } from "../../../httpServices/auth/auth";
 import { getDate } from "../../../utils/formatDate";
 class HeaderForm extends Component {
   render() {
-    if (!admin()) return 0;
     const {
       event,
       errors,
@@ -27,7 +25,7 @@ class HeaderForm extends Component {
             style={{ height: "255px", width: "240px" }}
           />
         </div>
-        <div className="col text-left">
+        <div className="col  text-left">
           <form>
             <input
               autoFocus
@@ -54,6 +52,26 @@ class HeaderForm extends Component {
                 type="text"
                 name="location"
                 value={event.location}
+                onChange={change}
+                className="event-input-edit text-white"
+              />
+            </div>
+            <div className="font-weight-light">
+              <i class="fab fa-facebook-f pr-2"></i>
+              <input
+                type="text"
+                name="facebook_link"
+                value={event.facebook_link}
+                onChange={change}
+                className="event-input-edit text-white"
+              />
+            </div>
+            <div className="font-weight-light">
+              <i class="fab fa-twitter pr-2" aria-hidden="true"></i>
+              <input
+                type="text"
+                name="twitter_link"
+                value={event.twitter_link}
                 onChange={change}
                 className="event-input-edit text-white"
               />

@@ -1,6 +1,5 @@
 import http from "../httpService";
-import { apiEndpoint } from "../../config.json";
-let route = apiEndpoint + "event/";
+let route = process.env.REACT_APP_API + "event/";
 const handleServerError = require("../handleServerErrors");
 
 export async function getALlEvents() {
@@ -87,6 +86,17 @@ export async function deleteSession(id, session_id, token) {
     route + "sessions/" + id + "/" + session_id,
     { headers: headers }
   );
+  const result = handleServerError(response);
+  if (result) return { data: null, error: result };
+  return { data: response.data, error: null };
+}
+export async function giveFeedback(feedback, token) {
+  let headers = {};
+  if (token)
+    headers = { "Content-Type": "application/json", "x-auth-token": token };
+  const response = await http.post(route + "feedback/", feedback, {
+    headers: headers
+  });
   const result = handleServerError(response);
   if (result) return { data: null, error: result };
   return { data: response.data, error: null };

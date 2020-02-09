@@ -4,7 +4,7 @@ const Schema = {
   name: Joi.string()
     .required()
     .min(2)
-    .max(128),	
+    .max(128),
   phone: Joi.string()
     .required()
     .min(6)

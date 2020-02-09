@@ -11,6 +11,11 @@ module.exports = function(result) {
       };
     if (result.response.status === 304) localStorage.removeItem("x-auth-token");
     if (result.response.status === 200) return null;
+    if (result.response.status === 500)
+      return {
+        key: "server error",
+        message: "May be the network is not established."
+      };
     if (result.response.status !== 200)
       return { key: "error", message: "error while connecting network" };
     return null;

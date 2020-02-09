@@ -10,7 +10,7 @@ class EventsList extends Component {
   async componentDidMount() {
     try {
       const { data: events } = await getALlEvents();
-      if (!events) return 0;
+      if (!events) window.location = "/";
       const state = this.state;
       state.events = events;
       state.filtered = events;
@@ -53,7 +53,6 @@ class EventsList extends Component {
             >
               All
             </p>
-
             <p
               className={
                 this.state.filter === "upcoming"

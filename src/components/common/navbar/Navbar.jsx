@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../navbar/navbar.css";
 import { Link } from "react-router-dom";
-import { authed } from "../../../httpServices/auth/auth";
+import { authed, admin } from "../../../httpServices/auth/auth";
 import { getUserByToken } from "../../../httpServices/user/user";
 class NavBar extends Component {
   state = {
@@ -75,14 +75,19 @@ class NavBar extends Component {
                   {user.name.toUpperCase()} {user.isAdmin && "(Admin)"}
                 </Link>
                 <div className="dropdown-menu">
-                  {/* <a
+                  <a
                     href={`/profile/${user._id}`}
                     className="dropdown-item cursor-p"
                   >
                     <i className="fa fa-sign-out pull-right"></i>
                     <i className="fa fa-user" aria-hidden="true"></i>&nbsp;
                     PROFILE
-                  </a> */}
+                  </a>
+                  {admin() && (
+                    <a href="/admin" className="dropdown-item cursor-p">
+                      <i className="fas fa-user-shield    "></i> &nbsp; ADMIN
+                    </a>
+                  )}
                   <a
                     href="/logout"
                     className="dropdown-item cursor-p"

@@ -147,6 +147,13 @@
   color: #1a252f !important;
 }
 
+.timeline_photo {
+  overflow: hidden;
+  width: 50px !important;
+  height: 50px !important;
+  border-radius: 100% !important;
+}
+
 @media only screen and (max-width: 575px) {
   .form_list_item {
     display: inline;

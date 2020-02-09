@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App/App";
 import * as serviceWorker from "./serviceWorker";
 import "@fortawesome/fontawesome-free/css/all.css";
-import "dotenv";
+console.log(process.env);
 ReactDOM.render(<App />, document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change

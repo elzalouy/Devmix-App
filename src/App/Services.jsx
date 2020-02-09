@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, Redirect } from "react-router-dom";
 import { getUserByToken } from "../httpServices/user/user";
 import { authed, admin } from "../httpServices/auth/auth";
-// import WorkShops from "../components/workshops/workshops";
+import AdminPanel from "../components/admin/adminPanel";
 import Ask from "../components/ask/ask";
 import Events from "../components/events/events";
 import Register from "../components/user/register";
@@ -13,6 +13,9 @@ import EventDetails from "../components/events/EventDetails/eventDetails";
 import JoinUs from "../components/JoinUs/joinUs";
 import NotFound from "../components/common/NotFound/NotFound";
 import AddEvent from "../components/events/newEvent";
+import EmailConfirm from "../components/user/confirmEmail";
+import Profile from "../components/user/Profile/profile";
+import ResetPassword from "../components/user/ResetPassword";
 const _ = require("lodash");
 class Services extends Component {
   state = {
@@ -22,13 +25,7 @@ class Services extends Component {
         link: "/events",
         active: false
       },
-      // {
-      //   label: "WORKSHOPS",
-      //   link: "/workshops",
-      //   active: false
-      // },
       { label: "ASK", link: "/ask", active: false },
-
       {
         label: "LOGIN",
         link: "/login",
@@ -45,10 +42,6 @@ class Services extends Component {
         route: "/events",
         Route: <Route path="/events" key="events" component={Events} />
       },
-      // {
-      //   route: "/workshops",
-      //   Route: <Route path="/workshops" key="workshops" component={WorkShops} />
-      // },
       {
         route: "/ask",
         Route: <Route path="/ask" key="ask" component={Ask} />
@@ -98,7 +91,29 @@ class Services extends Component {
       },
       {
         route: "/logout",
-        Route: <Route path="/logout" component={Logout} key="logout" />
+        Route: (
+          <Route
+            path="/logout"
+            render={props => {
+              if (authed()) return <Logout {...props} />;
+              else return <Redirect to="/home" />;
+            }}
+            key="logout"
+          />
+        )
+      },
+      {
+        route: "/admin",
+        Route: (
+          <Route
+            path="/admin"
+            key="admin"
+            render={props => {
+              if (admin()) return <AdminPanel {...props} />;
+              else return <Redirect to="/home" />;
+            }}
+          />
+        )
       },
       {
         route: "/Not-Found",
@@ -114,6 +129,30 @@ class Services extends Component {
         Route: <Route path="/home" component={Home} key="home" />
       },
       {
+        route: "/profile",
+        Route: <Route path="/profile/:id" component={Profile} key="profile" />
+      },
+      {
+        route: "/emailConfirm/:token",
+        Route: (
+          <Route
+            path="/emailConfirm/:token"
+            component={EmailConfirm}
+            key="confirmEmail"
+          />
+        )
+      },
+      {
+        route: "/ResetPasword/:token",
+        Route: (
+          <Route
+            path="/ResetPasword/:token"
+            component={ResetPassword}
+            key="reset Password"
+          />
+        )
+      },
+      {
         route: "/",
         Route: <Redirect from="/" to="/home" exact key="/" />
       },
@@ -122,7 +161,6 @@ class Services extends Component {
       }
     ]
   };
-
   componentDidMount() {
     const state = this.state;
     if (authed()) {

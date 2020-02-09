@@ -1,9 +1,18 @@
 import http from "../httpService";
-import { apiEndpoint } from "../../../src/config.json";
 const handleServerError = require("../handleServerErrors");
-const route = apiEndpoint + "join/";
+const route = process.env.REACT_APP_API + "join/";
 
-export async function getAllJoinRequests() {}
+export async function getAllJoinRequests(token) {
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token
+  };
+  const response = await http.get(route + "list", { headers: headers });
+  const result = handleServerError(response);
+  if (result) return { data: null, error: response };
+  return { data: response.data, error: null };
+}
+
 export async function addJoinRequest(request) {
   const response = await http.post(route + "request", {
     fullName: request.fullName,
@@ -21,4 +30,17 @@ export async function addJoinRequest(request) {
   const result = handleServerError(response);
   if (result) return { data: null, error: result };
   return { data: null, error: null };
+}
+
+export async function deleteJoinRequest(id, token) {
+  const headers = {
+    "Content-Type": "application/json",
+    "x-auth-token": token
+  };
+  const response = await http.delete(route + "delete/" + id, {
+    headers: headers
+  });
+  const result = handleServerError(response);
+  if (result) return { data: null, error: result };
+  return { data: response.data, error: null };
 }

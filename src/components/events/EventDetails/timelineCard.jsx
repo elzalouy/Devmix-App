@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { getTime } from "../../../utils/formatDate";
 import { getUserById } from "../../../httpServices/user/user";
-
+import UserImage from "../../../assets/user.png";
+import "../events.css";
 class TimelineCard extends Component {
   state = { speaker: {}, session: {} };
   async componentDidMount() {
@@ -27,14 +28,20 @@ class TimelineCard extends Component {
                 {hour}:{minutes}
                 &nbsp; <i className="text-gray">by</i>
               </p>
-              <p className="text-dark">
-                <img
-                  src={speaker.profile_photo}
-                  alt=""
-                  className="brd-100 width-15 height-15 pr-2"
-                />
-                {speaker.name}
-              </p>
+              <div className="row p-0 m-0 w-100 custom-inline-center align-items-center">
+                <div className="timeline_photo">
+                  <img
+                    src={
+                      speaker.profile_photo
+                        ? speaker.profile_photo.url
+                        : UserImage
+                    }
+                    alt=""
+                    className="w-100 h-100"
+                  />
+                </div>
+                <p className="text-dark p-0 m-0 pl-1">{speaker.name}</p>
+              </div>
               <hr className="bg-gray" />
             </div>
           </div>

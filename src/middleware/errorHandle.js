@@ -1,4 +1,4 @@
-module.exports = function(handler) {
+export default function(handler) {
   return async e => {
     try {
       await handler(e);
@@ -7,4 +7,4 @@ module.exports = function(handler) {
       alert(ex);
     }
   };
-};
+}

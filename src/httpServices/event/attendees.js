@@ -1,7 +1,6 @@
 import http from "../httpService";
 let route = process.env.REACT_APP_API + "attendees/";
 const handleServerError = require("../handleServerErrors");
-console.log(route);
 export async function attendEvent(id, token) {
   const headers = {
     "Content-Type": "application/json",

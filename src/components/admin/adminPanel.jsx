@@ -8,7 +8,6 @@ import AdministratorsList from "./administratorsList";
 class AdminPanel extends Component {
   state = {};
   render() {
-    console.log(process.env.NAME);
     return (
       <React.Fragment>
         <div className="page-section bg-dark">

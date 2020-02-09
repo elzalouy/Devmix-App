@@ -112,7 +112,6 @@ class AskList extends Component {
         user_id: state.filtered[index].user_id
       };
       const error = validateAsk(ask);
-      console.log(error);
       if (error) state.formError = error.message;
       else {
         const result = await AnswerQuestion(state.questionId, ask, getToken());
@@ -210,7 +209,6 @@ class AskList extends Component {
                 allAsks.length > 0 &&
                 allAsks.map(item => {
                   const { day, month, year } = getDate(item.date);
-                  console.log(item);
                   return (
                     <div
                       key={item && item._id}

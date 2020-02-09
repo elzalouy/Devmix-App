@@ -13,7 +13,6 @@ class ProfileEvents extends Component {
     const result = await getUserAttendees(this.props.id);
     if (result.error) state.errors = result.error;
     else state.userEvents = result.data;
-    console.log(result.data);
     this.setState({ state });
   }
 

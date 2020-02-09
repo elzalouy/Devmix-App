@@ -53,9 +53,7 @@ class EventComponent extends Component {
       }
       this.setState({ state });
       this.ChangeNumberOfDays();
-    } catch (ex) {
-      console.log(ex);
-    }
+    } catch (ex) {}
   }
   ChangeNumberOfDays = handle(() => {
     if (!this.state.event) return 0;

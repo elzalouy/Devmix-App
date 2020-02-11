@@ -24,7 +24,7 @@ Devmix uses a number of open source packages to work properly:
 * [bootstrap] - Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.
 * [JWT] - JSON Web Tokens are an open, industry standard RFC 7519 method for representing claims securely between two parties.
 * [lodash] - A modern JavaScript utility library delivering modularity, performance & extras.
-*[Cloudinary] - Automate the entire image-processing pipeline: from uploads to on-the-fly manipulations to optimization to dynamic delivery with any CDN.
+* [Cloudinary] - Automate the entire image-processing pipeline: from uploads to on-the-fly manipulations to optimization to dynamic delivery with any CDN.
 
 And of course Devmix itself is open source with a [public repository][devmix]
  on GitHub.

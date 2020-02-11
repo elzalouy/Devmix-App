@@ -58,7 +58,6 @@ $ npm start
 ```
 
 **Free APP, Hell Yeah!**
-![Devmix Site](https://devmix.herokuapp.com/home)
 ![](https://github.com/elzalouy/Devmix/blob/master/site.gif)
 
 
@@ -66,8 +65,7 @@ $ npm start
 
 
    [how to install node.js]: <https://www.guru99.com/download-install-node-js.html>
-   [devmix]: <https://github.com/elzalouy/Devmix-App>
-   [git-repo-url]: <https://github.com/elzalouy/Devmix>
+   [devmix]: <https://devmix.herokuapp.com/home>
    [node.js]: <http://nodejs.org>
    [Mongo Database]: <https://www.mongodb.com/>
    [Express JS]: <expressjs.com>

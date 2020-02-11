@@ -58,7 +58,7 @@ $ npm start
 ```
 
 **Free APP, Hell Yeah!**
-![](https://devmix.herokuapp.com/home)
+![Devmix Site](https://devmix.herokuapp.com/home)
 ![](https://github.com/elzalouy/Devmix/blob/master/site.gif)
 
 

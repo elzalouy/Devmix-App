@@ -1,9 +1,8 @@
 # Devmix
 
 
-![build Status](https://scontent.fcai1-2.fna.fbcdn.net/v/t31.0-8/p960x960/22051325_1588748554518253_7857270476047284440_o.png?_nc_cat=110&_nc_ohc=7p-f5Q1tb7IAQk2MD91uHf7JsdXrPZIPYD5LonszpF93XlswfrN37dMtA&_nc_ht=scontent.fcai1-2.fna&oh=01ee5b7b345b542066f899ab9d4da338&oe=5E7B3D7B)
+![build Status](https://github.com/elzalouy/Devmix-App/blob/master/site.gif)
 
-[![build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://www.linkedin.com/in/ezat-elzalouy-844bb0133/)
 
 [Devmix] is a front-end application which will help people to interact with our team and facilitate the way of learning Information technology fields.
 

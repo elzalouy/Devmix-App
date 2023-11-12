@@ -9,7 +9,7 @@
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-svg-core": "^1.2.27",
-    "axios": "^0.21.1",
+    "axios": "^1.6.0",
     "bootstrap": "^4.3.1",
     "config": "^3.2.5",
     "dotenv": "^8.2.0",
